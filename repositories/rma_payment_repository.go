@@ -2,43 +2,37 @@ package repositories
 
 import (
 	"fmt"
-	"rma_payment_service/model"
+	"cms_payment_service/model"
 	"gorm.io/gorm"
 )
 
-type RmaPaymentRepository struct{
+type CmsPaymentRepository struct{
 	DB *gorm.DB
 }
 
-func NewRmaPaymentRepository(db *gorm.DB) *RmaPaymentRepository {
-	return &RmaPaymentRepository{DB: db}
+func NewCmsPaymentRepository(db *gorm.DB) *CmsPaymentRepository {
+	return &CmsPaymentRepository{DB: db}
+}
+func (r *CmsPaymentRepository) GetRmaPaymentResponse() ([]model.PaymentResponse, error) {
+
+	var paymentResponses []model.PaymentResponse
+	result := r.DB.Find(&paymentResponses)
+
+	if result.Error != nil {
+		return nil, fmt.Errorf("failed to retrieve payment responses: %v", result.Error)
+	}
+
+	return paymentResponses, nil
 }
 
-func (repo *RmaPaymentRepository) StorePaymentResponse(paymentInput model.RmaPaymentResponseInput) error {
+func (r *CmsPaymentRepository) GetStripePaymentResponse() ([]model.StripeResponse, error) {
 
-    result := repo.DB.Create(&model.PaymentResponse{
-		BfsBfsTxnId:       paymentInput.BfsBfsTxnId,
-		BfsDebitAuthNo:    paymentInput.BfsDebitAuthNo,
-		BfsRemitterName:   paymentInput.BfsRemitterName,
-		BfsTxnCurrency:    paymentInput.BfsTxnCurrency,
-		BfsBfsTxnTime:     paymentInput.BfsBfsTxnTime,
-		BfsBenfId:         paymentInput.BfsBenfId,
-		BfsRemitterBankId: paymentInput.BfsRemitterBankId,
-		BfsOrderNo:        paymentInput.BfsOrderNo,
-		BfsDebitAuthCode:  paymentInput.BfsDebitAuthCode,
-		BfsTxnAmount:      paymentInput.BfsTxnAmount,
-		BfsBenfTxnTime:    paymentInput.BfsBenfTxnTime,
-		BfsMsgType:        paymentInput.BfsMsgType,
-		UserId:            paymentInput.UserId,
-	})
+	var stripeResponses []model.StripeResponse
+	result := r.DB.Find(&stripeResponses)
 
-    if result.Error != nil {
-        return fmt.Errorf("failed to save the payment responses: %v", result.Error)
-    }
+	if result.Error != nil {
+		return nil, fmt.Errorf("failed to retrieve stripe payment responses: %v", result.Error)
+	}
 
-    if result.RowsAffected == 0 {
-        return fmt.Errorf("no rows were inserted")
-    }
-    
-    return nil
+	return stripeResponses, nil
 }

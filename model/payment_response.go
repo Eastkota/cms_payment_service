@@ -20,38 +20,31 @@ type PaymentResponse struct {
 	BfsBenfTxnTime    string `json:"bfs_benfTxnTime" gorm:"type:varchar(50)"`
 	BfsMsgType        string `json:"bfs_msgType" gorm:"type:varchar(50)"`
 	MembershipDurationId uuid.UUID    `json:"membership_duration_id" gorm:"type:uuid"`
-	UserId            uuid.UUID `json:"user_id" gorm:"type:string"`
-}
-
-type AuthUserMembership struct {
-    ID                   uuid.UUID `gorm:"type:uuid;primaryKey" json:"id"`
-    MembershipJoinDate   time.Time `gorm:"type:timestamptz;not null" json:"membership_join_date"`
-    MembershipEndDate    time.Time `gorm:"type:timestamptz;not null" json:"membership_end_date"`
-    UserId               uuid.UUID `gorm:"type:uuid;not null" json:"user_id"`
-    MembershipDurationId uuid.UUID `gorm:"type:uuid;not null" json:"membership_duration_id"`
-    CreatedAt            time.Time `json:"created_at"`
-    UpdatedAt            time.Time `json:"updated_at"`
+	UserId            uuid.UUID `json:"user_id" gorm:"type:uuid"`
 }
 
 func (PaymentResponse) TableName() string {
     return "payment.payment_responses_rma"
 }
 
-type PaymentResult struct {
-	Message string `json:"message"`
+type StripeResponse struct {
+	Amount                string    `gorm:"type:varchar" json:"amount"`
+	TransactionId         string    `gorm:"type:varchar" json:"transaction_id"`
+	UserId                uuid.UUID `gorm:"type:uuid" json:"user_id"`
+	MembershipDurationId  uuid.UUID `gorm:"type:uuid" json:"membership_duration_id"`
+	Status                string    `gorm:"type:varchar" json:"status"`
+	Remarks               string    `gorm:"type:varchar" json:"remarks"`
+	CreatedAt             time.Time `json:"created_at"`
+	UpdatedAt             time.Time `json:"updated_at"`
+	Product               string    `gorm:"type:varchar" json:"product"`
 }
 
-type GenericRmaResponse struct {
+func (StripeResponse) TableName() string {
+    return "payment.payment_responses_stripe"
+}
+
+
+type GenericCmsPaymentResponse struct {
 	Data  string `json:"data"`
-	Error *RmaPaymentError
-}
-type Bank struct {
-	Code string `json:"code"`
-	Name string `json:"name"`
-}
-
-type ArResponseData struct {
-	TxnId  string `json:"txnId"`
-	Status string `json:"status"`
-	Banks  []Bank `json:"banks"`
+	Error *CmsPaymentError
 }

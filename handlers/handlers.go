@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"rma_payment_service/graph"
+	"cms_payment_service/graph"
 	
 	"context"
 	"encoding/json"

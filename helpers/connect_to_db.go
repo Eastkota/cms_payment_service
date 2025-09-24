@@ -1,7 +1,7 @@
 package helpers
 
 import (
-    "rma_payment_service/config"
+    "cms_payment_service/config"
     "context"
     "database/sql"
     "fmt"

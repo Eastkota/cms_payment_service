@@ -2,15 +2,16 @@ package model
 
 
 type GenericRmaPaymentSuccessData struct {
-	Message string `json:"message"`
+	Message []PaymentResponse `json:"message"`
 	Code    string `json:"code"`
 }
 
-type GenericAeRmaPaymentSuccessData struct {
-	TxnId string `json:"txn_id"`
+type GenericStripePaymentSuccessData struct {
+	Message []StripeResponse `json:"message"`
+	Code    string            `json:"code"`
 }
 
-type GenericRmaPaymentResponse struct {
+type GenericPaymentResponse struct {
 	Data  interface{}
-	Error *RmaPaymentError
+	Error *CmsPaymentError
 }

@@ -1,4 +1,4 @@
-module rma_payment_service
+module cms_payment_service
 
 go 1.23.0
 

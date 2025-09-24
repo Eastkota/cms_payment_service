@@ -1,7 +1,8 @@
 package repositories
 
-import "rma_payment_service/model"
+import "cms_payment_service/model"
 
 type Repository interface {
-	StorePaymentResponse(paymentInput model.RmaPaymentResponseInput) error
+	GetRmaPaymentResponse() ([]model.PaymentResponse, error)
+	GetStripePaymentResponse() ([]model.StripeResponse, error)
 }

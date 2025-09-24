@@ -5,17 +5,14 @@ import (
 )
 
 var queryType *graphql.Object
-var mutationType *graphql.Object
 
 var schema graphql.Schema
 var err error
 
-func InitSchema(q *graphql.Object, m *graphql.Object) {
+func InitSchema(q *graphql.Object) {
     queryType = q
-    mutationType = m
     schema, err = graphql.NewSchema(graphql.SchemaConfig{
         Query:    queryType,
-        Mutation: mutationType,
     })
 }
 

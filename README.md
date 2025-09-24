@@ -1,1 +1,1 @@
-# rma_payment_service
+# cms_payment_service

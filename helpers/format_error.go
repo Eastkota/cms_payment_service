@@ -1,11 +1,11 @@
 package helpers
 
-import "rma_payment_service/model"
+import "cms_payment_service/model"
 
-func FormatError(err error) *model.GenericRmaPaymentResponse {
-	return &model.GenericRmaPaymentResponse{
+func FormatError(err error) *model.GenericPaymentResponse {
+	return &model.GenericPaymentResponse{
 		Data: nil,
-		Error: &model.RmaPaymentError{
+		Error: &model.CmsPaymentError{
 			Message: err.Error(),
 		},
 	}

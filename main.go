@@ -1,14 +1,14 @@
 package main
 
 import (
-	"rma_payment_service/repositories"
-	"rma_payment_service/resolvers"
-	"rma_payment_service/services"
-	"rma_payment_service/graph"
-	"rma_payment_service/helpers"
+	"cms_payment_service/repositories"
+	"cms_payment_service/resolvers"
+	"cms_payment_service/services"
+	"cms_payment_service/graph"
+	"cms_payment_service/helpers"
 	"log"
 
-	"rma_payment_service/handlers"
+	"cms_payment_service/handlers"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/echo/v4"
 	"github.com/joho/godotenv"
@@ -25,14 +25,13 @@ func main() {
     if err != nil {
         log.Fatal("Failed to connect to database: " + err.Error())
     }
-    rmaPaymentRepository := repositories.NewRmaPaymentRepository(db)
-    rmaPaymentService := services.NewRmaPaymentService(rmaPaymentRepository)
-    resolver := resolvers.NewRmaPaymentResolver(rmaPaymentService)
+    cmsPaymentRepository := repositories.NewCmsPaymentRepository(db)
+    cmsPaymentService := services.NewCmsPaymentService(cmsPaymentRepository)
+    resolver := resolvers.NewCmsPaymentResolver(cmsPaymentService)
 
-    mutationType := schema.NewMutationType(resolver)
 	queryType := schema.NewQueryType(resolver)
 
-	schema.InitSchema(queryType, mutationType)
+	schema.InitSchema(queryType)
 	e := echo.New()
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
 		AllowOrigins: []string{"http://localhost:3000"}, // Add any origins you need

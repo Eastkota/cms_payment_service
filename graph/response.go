@@ -2,25 +2,42 @@ package schema
 
 import "github.com/graphql-go/graphql"
 
-var GenericRmaPaymentSuccessResponse = graphql.NewObject(graphql.ObjectConfig{
-	Name: "GenericRmaPaymentSuccessResponse",
-	Fields: graphql.Fields{
-		"data":  &graphql.Field{Type: GenericRmaPaymentSuccessData},
-		"error": &graphql.Field{Type: RmaPaymentError},
-	},
+var GenericRmaPaymentSuccessData = graphql.NewObject(graphql.ObjectConfig{
+    Name: "GenericRmaPaymentSuccessData",
+    Fields: graphql.Fields{
+        "Message": &graphql.Field{Type: graphql.NewList(RmaPaymentResponse)},
+    },
 })
-var GenericAeRmaPaymentSuccessResponse = graphql.NewObject(graphql.ObjectConfig{
-	Name: "GenericAeRmaPaymentSuccessResponse",
+
+var GenericStripePaymentSuccessData = graphql.NewObject(graphql.ObjectConfig{
+	Name: "GenericStripePaymentSuccessData",
 	Fields: graphql.Fields{
-		"data": &graphql.Field{Type: GenericAeRmaPaymentSuccessData},
-		"error": &graphql.Field{Type: RmaPaymentError},
+		"Message": &graphql.Field{Type: graphql.NewList(StripePaymentResponse)},
 	},
 })
 
-var ArResponse = graphql.NewObject(graphql.ObjectConfig{
-	Name: "ArResponse",
-	Fields: graphql.Fields{
-		"data":  &graphql.Field{Type: ArResponseData},
-		"error": &graphql.Field{Type: RmaPaymentError},
-	},
+
+// Define the new top-level object type
+var GenericPaymentResponse = graphql.NewObject(graphql.ObjectConfig{
+    Name: "GenericPaymentResponse",
+    Fields: graphql.Fields{
+        "data": &graphql.Field{
+            Type: GenericRmaPaymentSuccessData,
+        },
+        "error": &graphql.Field{
+            Type: CmsPaymentError,
+        },
+    },
 })
+var GenericStripePaymentResponse = graphql.NewObject(graphql.ObjectConfig{
+    Name: "GenericStripePaymentResponse",
+    Fields: graphql.Fields{
+        "data": &graphql.Field{
+            Type: GenericStripePaymentSuccessData,
+        },
+        "error": &graphql.Field{
+            Type: CmsPaymentError,
+        },
+    },
+})
+
