@@ -17,12 +17,12 @@ RUN go mod download
 COPY . .
 
 # Build Service
-RUN go build -o rmapaymentservice
+RUN go build -o cmspaymentservice
 
 
 # Expose the necessary port
-EXPOSE 8099
+EXPOSE 8100
 
 # Command to run the service
-CMD ["./rmapaymentservice"]
+CMD ["./cmspaymentservice"]
 
