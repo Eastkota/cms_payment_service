@@ -21,4 +21,6 @@ const (
 	RMA_PAYMENT_API           = "https://bfssecure.rma.org.bt/BFSSecure/nvpapi"
 )
 
+func AuthServiceApi() string { return os.Getenv("AUTH_SERVICE_API") }
+
 
