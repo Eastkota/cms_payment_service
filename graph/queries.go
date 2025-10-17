@@ -32,13 +32,13 @@ func NewQueryType(resolver *resolvers.CmsPaymentResolver) *graphql.Object {
 			"GetRmaPaymentResponse": &graphql.Field{
 				Type: GenericPaymentResponse,
 				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-					return AuthMiddleware(resolver.GetCmsPaymentResponse)(p)
+					return AuthMiddleware(PermissionMiddleware("list",resolver.GetCmsPaymentResponse))(p)
 				},
 			},
 			"GetStripePaymentResponse": &graphql.Field{
 				Type: GenericStripePaymentResponse,
 				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-					return AuthMiddleware(resolver.GetStripePaymentResponse)(p)
+					return AuthMiddleware(PermissionMiddleware("list",resolver.GetStripePaymentResponse))(p)
 				},
 			},
 		},
