@@ -31,6 +31,14 @@ func NewQueryType(resolver *resolvers.CmsPaymentResolver) *graphql.Object {
 			},
 			"GetRmaPaymentResponse": &graphql.Field{
 				Type: GenericPaymentResponse,
+				Args: graphql.FieldConfigArgument{
+					"offset": &graphql.ArgumentConfig{
+						Type: graphql.Int,
+					},
+					"limit": &graphql.ArgumentConfig{
+						Type: graphql.Int,
+					},
+				},
 				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 					return AuthMiddleware(PermissionMiddleware("list",resolver.GetCmsPaymentResponse))(p)
 				},

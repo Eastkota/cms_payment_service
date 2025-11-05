@@ -15,8 +15,8 @@ func NewCmsPaymentService(repository repositories.Repository) *CmsPaymentService
 	return &CmsPaymentService{Repository: repository}
 }
 
-func (s *CmsPaymentService) GetRmaPaymentResponse() ([]model.PaymentResponse, error) {
-	return s.Repository.GetRmaPaymentResponse()
+func (s *CmsPaymentService) GetRmaPaymentResponse(offset, limit int) ([]model.PaymentResponse, error) {
+	return s.Repository.GetRmaPaymentResponse(offset, limit)
 }
 func (s *CmsPaymentService) GetStripePaymentResponse() ([]model.StripeResponse, error) {
 	return s.Repository.GetStripePaymentResponse()

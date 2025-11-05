@@ -19,7 +19,10 @@ func NewCmsPaymentResolver(service services.Services) *CmsPaymentResolver {
 }
 
 func (r *CmsPaymentResolver) GetCmsPaymentResponse(p graphql.ResolveParams) (interface{}, error) {
-    paymentResponses, err := r.Services.GetRmaPaymentResponse()
+	offset, _ := p.Args["offset"].(int)
+	limit, _ := p.Args["limit"].(int)
+
+    paymentResponses, err := r.Services.GetRmaPaymentResponse(offset, limit)
     if err != nil {
         return nil, fmt.Errorf("error retrieving payment responses: %w", err)
     }

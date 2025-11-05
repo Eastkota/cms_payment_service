@@ -13,10 +13,13 @@ type CmsPaymentRepository struct{
 func NewCmsPaymentRepository(db *gorm.DB) *CmsPaymentRepository {
 	return &CmsPaymentRepository{DB: db}
 }
-func (r *CmsPaymentRepository) GetRmaPaymentResponse() ([]model.PaymentResponse, error) {
+func (r *CmsPaymentRepository) GetRmaPaymentResponse(offset, limit int) ([]model.PaymentResponse, error) {
 
 	var paymentResponses []model.PaymentResponse
-	result := r.DB.Find(&paymentResponses)
+	result := r.DB.
+		Offset(offset).
+		Limit(limit).
+		Find(&paymentResponses)
 
 	if result.Error != nil {
 		return nil, fmt.Errorf("failed to retrieve payment responses: %v", result.Error)
