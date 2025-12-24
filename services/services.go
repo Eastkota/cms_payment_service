@@ -7,4 +7,5 @@ import (
 type Services interface {
 	GetRmaPaymentResponse(offset, limit int) ([]model.PaymentResponse, error)
 	GetStripePaymentResponse() ([]model.StripeResponse, error)
+	GetInatePaymentResponse() ([]model.InatePaymentResponse, error)
 }

@@ -39,3 +39,15 @@ func (r *CmsPaymentRepository) GetStripePaymentResponse() ([]model.StripeRespons
 
 	return stripeResponses, nil
 }
+
+func (r *CmsPaymentRepository) GetInatePaymentResponse() ([]model.InatePaymentResponse, error) {
+
+	var inateResponses []model.InatePaymentResponse
+	result := r.DB.Find(&inateResponses)
+
+	if result.Error != nil {
+		return nil, fmt.Errorf("failed to retrieve inate payment responses: %v", result.Error)
+	}
+
+	return inateResponses, nil
+}

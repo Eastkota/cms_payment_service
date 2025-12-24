@@ -41,3 +41,22 @@ var GenericStripePaymentResponse = graphql.NewObject(graphql.ObjectConfig{
     },
 })
 
+var GenericInatePaymentSuccessData = graphql.NewObject(graphql.ObjectConfig{
+    Name: "GenericInatePaymentSuccessData",
+    Fields: graphql.Fields{
+        "Message": &graphql.Field{Type: graphql.NewList(InatePaymentResponse)},
+    },
+})
+
+var GenericInatePaymentResponse = graphql.NewObject(graphql.ObjectConfig{
+    Name: "GenericInatePaymentResponse",
+    Fields: graphql.Fields{
+        "data": &graphql.Field{
+            Type: GenericInatePaymentSuccessData,
+        },
+        "error": &graphql.Field{
+            Type: CmsPaymentError,
+        },
+    },
+})
+

@@ -11,6 +11,11 @@ type GenericStripePaymentSuccessData struct {
 	Code    string            `json:"code"`
 }
 
+type GenericInatePaymentSuccessData struct {
+	Message []InatePaymentResponse `json:"message"`
+	Code    string                 `json:"code"`
+}
+
 type GenericPaymentResponse struct {
 	Data  interface{}
 	Error *CmsPaymentError

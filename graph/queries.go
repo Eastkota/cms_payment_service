@@ -49,6 +49,12 @@ func NewQueryType(resolver *resolvers.CmsPaymentResolver) *graphql.Object {
 					return AuthMiddleware(PermissionMiddleware("list",resolver.GetStripePaymentResponse))(p)
 				},
 			},
+			"GetInatePaymentResponse": &graphql.Field{
+				Type: GenericInatePaymentResponse,
+				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+					return AuthMiddleware(PermissionMiddleware("list",resolver.GetInatePaymentResponse))(p)
+				},
+			},
 		},
 	})
 }

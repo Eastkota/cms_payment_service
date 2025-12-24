@@ -46,3 +46,16 @@ func (r *CmsPaymentResolver) GetStripePaymentResponse(p graphql.ResolveParams) (
 		Error: nil,
 	}, nil
 }
+
+func (r *CmsPaymentResolver) GetInatePaymentResponse(p graphql.ResolveParams) (interface{}, error) {
+	inateResponses, err := r.Services.GetInatePaymentResponse()
+	if err != nil {
+		return nil, fmt.Errorf("error retrieving inate payment responses: %w", err)
+	}
+	return &model.GenericPaymentResponse{
+		Data: &model.GenericInatePaymentSuccessData{
+			Message: inateResponses,
+		},
+		Error: nil,
+	}, nil
+}

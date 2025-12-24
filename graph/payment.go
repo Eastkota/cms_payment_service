@@ -48,3 +48,17 @@ var GenericPaymentData = graphql.NewObject(graphql.ObjectConfig{
 		"Message": &graphql.Field{Type: graphql.String},
 	},
 })
+
+var InatePaymentResponse = graphql.NewObject(graphql.ObjectConfig{
+	Name: "InatePaymentResponse",
+	Fields: graphql.Fields{
+		"ID":                   &graphql.Field{Type: scalar.UUID},
+		"TransactionId":        &graphql.Field{Type: graphql.String},
+		"Product":              &graphql.Field{Type: graphql.String},
+		"PurchaseDate":         &graphql.Field{Type: graphql.DateTime},
+		"UserId":               &graphql.Field{Type: scalar.UUID},
+		"MembershipDurationId": &graphql.Field{Type: scalar.UUID},
+		"Amount":               &graphql.Field{Type: graphql.Float},
+		"Status":               &graphql.Field{Type: graphql.String},
+	},
+})

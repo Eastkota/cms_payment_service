@@ -21,3 +21,7 @@ func (s *CmsPaymentService) GetRmaPaymentResponse(offset, limit int) ([]model.Pa
 func (s *CmsPaymentService) GetStripePaymentResponse() ([]model.StripeResponse, error) {
 	return s.Repository.GetStripePaymentResponse()
 }
+
+func (s *CmsPaymentService) GetInatePaymentResponse() ([]model.InatePaymentResponse, error) {
+	return s.Repository.GetInatePaymentResponse()
+}

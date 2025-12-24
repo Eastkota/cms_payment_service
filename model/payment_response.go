@@ -48,3 +48,20 @@ type GenericCmsPaymentResponse struct {
 	Data  string `json:"data"`
 	Error *CmsPaymentError
 }
+
+type InatePaymentResponse struct {
+	ID                   uuid.UUID `gorm:"type:uuid;primaryKey" json:"id"`
+	TransactionId        string    `json:"transaction_id" gorm:"type:string"`
+	Product            string    `json:"product" gorm:"type:string"`
+	PurchaseDate         time.Time `json:"purchase_date" gorm:"type:timestamptz"`
+	UserId               uuid.UUID `json:"user_id" gorm:"type:uuid"`
+	MembershipDurationId uuid.UUID `json:"membership_duration_id" gorm:"type:uuid"`
+	Amount			   float64   `json:"amount" gorm:"type:numeric"`
+	Status               string    `json:"status" gorm:"type:string"`
+	CreatedAt            time.Time `json:"created_at"`
+	UpdatedAt            time.Time `json:"updated_at"`
+}
+
+func (InatePaymentResponse) TableName() string {
+	return "payment.iap_transactions"
+}
